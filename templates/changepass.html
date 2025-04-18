@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admit Card</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f7f7f7;
+    }
+    header {
+      background: white;
+      border-bottom: 2px solid #ddd;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+    }
+    .logo-title img {
+      height: 60px;
+      margin-right: 10px;
+    }
+    .logo-title h1 {
+      color: #4b0082;
+      margin: 0;
+    }
+    .user-info {
+      text-align: right;
+    }
+    .user-info p {
+      margin: 2px 0;
+    }
+    .user-info img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-top: 5px;
+    }
+    nav {
+      background: #f8f8f8;
+      border-top: 1px solid #ccc;
+      border-bottom: 2px solid #444;
+      display: flex;
+      gap: 20px;
+      padding: 10px 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 5px 10px;
+      position: relative;
+    }
+    nav a:hover,
+    nav a.active {
+      font-weight: bold;
+      border-bottom: 2px solid #4b0082;
+    }
+    .container {
+      background-color: #fff;
+      padding: 30px 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      max-width: 100%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #1a237e;
+      font-size: 24px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+    }
+
+    .message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 20px;
+      font-weight: normal;
+      margin-left: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .form-field label {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #424242;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn {
+      margin: 20px 10px;
+      padding: 10px 25px;
+      background-color: white;
+      border: 2px solid #1a237e;
+      color: #1a237e;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #444;
+      padding: 20px 0;
+    }
+
+    .footer-line {
+      width: 80%;
+      border: 1px solid #2e1a84;
+      margin: 30px auto 10px auto;
+    }
+
+    .btn:hover {
+      background-color: #1a237e;
+      color: white;
+    }
+    .green { color: green; font-weight: bold; }
+    .red { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-title">
+      <img src="uap_logo.png" alt="Logo">
+      <h1>University of Asia Pacific</h1>
+    </div>
+    <div class="user-info">
+      <p><strong>Shahria Amin</strong> <span class="green">22201212</span> / <a href="#">Logout</a></p>
+      <p><span class="green">Current →</span> 2024, Fall / 2024, Spring - Term</p>
+      <p><span class="red">Registration →</span> 2024, Fall / 2024, Spring - Term</p>
+      <img src="student_photo.jpg" alt="Student">
+    </div>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a class="active" href="#">Admit Card</a>
+    <a href="#">Change Password</a>
+    <a href="#">Evaluation Form</a>
+    <a href="#">Registration</a>
+    <a href="#">Result</a>
+    <a href="#">Student Bill & Payment History</a>
+    <a href="#">Student Information</a>
+  </nav>
+<body>
+    <div class="container">
+        <h2>Change Password</h2>
+        <p class="message">
+            <strong>Message:</strong> Password must contain eight(8) digits including at least one uppercase alphabet, one lowercase alphabet and one number
+          </p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="password1">New Password:</label>
+            <input type="password" name="password1" id="password1" required>
+
+            <label for="password2">Confirm New Password:</label>
+            <input type="password" name="password2" id="password2" required><br><br>
+
+            <button type="submit" class="btn">Update</button>
+        </form>
+    </div>
+    
+      <script>
+        document.getElementById('').addEventListener('submit', function(e) {
+          e.preventDefault();
+    
+          const newPass = document.getElementById('password1').value;
+          const retype = document.getElementById('password2').value;
+    
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    
+          if (!passwordRegex.test(newPass)) {
+            alert('Password must contain at least 8 characters including one uppercase, one lowercase, and one number.');
+            return;
+          }
+    
+          if (newPass !== retype) {
+            alert('New password and retype do not match.');
+            return;
+          }
+    
+          alert('Password changed successfully!');
+          // Here you'd normally send the data to your server
+          document.getElementById('passwordForm').reset();
+        });
+      </script>
+    
+    </body>
+    <footer class="footer">
+        Powered by <strong>Edusoft Consultants Ltd.</strong><br>
+        Copyright © 2013 - 2024 Edusoft Consultants Ltd. All rights reserved.
+      </footer>
+    </html>

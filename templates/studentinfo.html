@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniCam</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 15px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 80px;
+      margin-right: 10px;
+    }
+
+    .logo-title h1 {
+      font-size: 28px;
+      color: #2e1a84;
+      margin: 0;
+    }
+
+    .logo-title span {
+      font-weight: bold;
+    }
+
+    .user-panel {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .user-panel .status {
+      font-size: 13px;
+    }
+
+    .user-panel .green {
+      color: green;
+      font-weight: bold;
+    }
+
+    .user-panel .red {
+      color: red;
+      font-weight: bold;
+    }
+
+    .user-photo {
+      width: 60px;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    /* Nav Bar */
+    .nav-bar {
+      background-color: #f5f5f5;
+      border-top: 2px solid #2e1a84;
+      border-bottom: 3px solid #2e1a84;
+    }
+
+    .nav-bar ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-bar ul li {
+      padding: 10px 15px;
+      position: relative;
+    }
+
+    .nav-bar ul li a {
+      text-decoration: none;
+      color: #2e1a84;
+      font-weight: bold;
+    }
+
+    .nav-bar ul li a.active {
+      color: black;
+    }
+
+    .arrow {
+      font-size: 10px;
+      margin-left: 3px;
+    }
+
+    /* Main Welcome Box */
+    main {
+      background-color: #f4f4f4;
+      padding: 40px 0;
+    }
+
+    .welcome-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .welcome-box {
+      border: 5px solid #000080;
+      background-color: #f9f9f9;
+      padding: 60px 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .welcome-box h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #444;
+      padding: 20px 0;
+    }
+
+    .footer-line {
+      width: 80%;
+      border: 1px solid #2e1a84;
+      margin: 30px auto 10px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo-title">
+      <img src="uap_logo.png" alt="UniCam Logo" class="logo" />
+      <h1>University of <span>Asia Pacific</span></h1>
+    </div>
+    <div class="user-panel">
+      <p><strong>Shahria Amin</strong> 22201212 / <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a></p>
+      <p class="status">
+        <span class="green">Current →</span> 2024, Fall / 2024, Spring - Term<br />
+        <span class="red">Registration →</span>
+        <span class="green">2024, Fall / 2024, Spring - Term</span>
+      </p>
+      <img src="user_photo.png" alt="User" class="user-photo" />
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="admit">Admit Card</a></li>
+      <li><a class="password_change-link" href="#">Change Password</a></li>
+      <li><a href="evolution">Evaluation Form</a></li>
+      <li><a href="course-registration">Registration</a></li>
+      <li><a href="result">Result</a></li>
+      <li><a href="#">Student Bill & Payment History</a></li>
+      <li><a href="{% url 'studentinfo' %}">Student Information</a></li>
+    </ul>
+  </nav>
+
+    <h4>Student Information Management</h4>
+    <h5><p class="message-label">Message:</p></body></h5>
+    <h3>Student Info</h3>
+    <main class="container">
+        
+        <section class="student-info">
+            
+            <div class="info-row">
+                <img src="student_photo.jpg" alt="Student Photo" class="student-pic"><br><br>
+                {% for student in students %}
+
+                <div class="info">
+                    <label>Full Name</label>
+                    <input type="text" value={{student.name}} readonly><br><br>
+
+                    <label>Father's Name</label>
+                    <input type="text" value={{student.fathername}} readonly><br><br>
+
+                    <label>Mother's Name</label>
+                    <input type="text" value={{student.mothername}} readonly><br><br>
+
+                    <label>Student Roll</label>
+                    <input type="text" value={{student.studentroll}} readonly><br><br>
+
+                    <label>Program</label>
+                    <input type="text" value={{student.program}} readonly>
+
+                    <label>Session</label>
+                    <input type="text" value={{student.session}} readonly><br><br>
+
+                    <label>DOB</label>
+                    <input type="text" value={{student.dob}} readonly>
+
+                    <label>Nationality</label>
+                    <input type="text" value={{student.nationality}} readonly><br><br>
+
+                    <label>Gender</label>
+                    <input type="text" value={{student.gender}} readonly><br><br>
+
+                    <label>Phone</label>
+                    <input type="text" value={{student.phone}} readonly>
+
+                    <label>Guargian Phone</label>
+                    <input type="text" value={{student.guargianphone}} readonly><br><br>
+
+                    <label>Email</label>
+                    <input type="text" value={{student.email}} readonly>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Section -->
+  <footer>
+    <hr class="footer-line" />
+    <p>Powered by <strong>Edusoft Consultants Ltd.</strong></p>
+    <p>&copy; 2013 - 2024 Edusoft Consultants Ltd. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript (for future enhancements) -->
+  <script>
+    // You can add interactivity here later (e.g., dropdown functionality)
+    console.log("Page Loaded");
+  </script>
+</body>
+</html>
