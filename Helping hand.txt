@@ -1,0 +1,14 @@
+git pull origin main --rebase
+
+
+If Git shows any merge conflicts, resolve them manually in your files, then:
+
+git add .
+git rebase --continue
+
+
+Once everything is resolved and rebased:
+
+git push origin main
+
+
