@@ -142,36 +142,51 @@
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header class="header">
-    <div class="logo-title">
-      <img src="uap_logo.png" alt="UniCam Logo" class="logo" />
-      <h1>University of <span>Asia Pacific</span></h1>
-    </div>
-    <div class="user-panel">
-      <p><strong>Shahria Amin</strong> 22201212 / <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a></p>
+ <!-- Header Section -->
+<header class="header">
+  <div class="logo-title">
+    <img src="uap_logo.png" alt="UniCam Logo" class="logo" />
+    <h1>University of <span>Asia Pacific</span></h1>
+  </div>
+
+  <div class="user-panel" style="display: flex; align-items: center; gap: 20px;">
+    <div class="user-info">
+      {% for student in students %}
+      <p><strong>{{student.name}}</strong> 22201212 {% endfor %}/
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+      </p>
       <p class="status">
         <span class="green">Current →</span> 2024, Fall / 2024, Spring - Term<br />
         <span class="red">Registration →</span>
         <span class="green">2024, Fall / 2024, Spring - Term</span>
       </p>
-      <img src="user_photo.png" alt="User" class="user-photo" />
     </div>
-  </header>
 
-  <!-- Navigation Bar -->
-  <nav class="nav-bar">
+    {% for student in students %}
+      {% if student.pic %}
+        <img src="{{ student.pic.url }}" alt="Student Picture"
+             style="height: 100px; width: 100px;" />
+         <!-- Show only one picture (e.g., logged-in student) -->
+      {% endif %}
+    {% endfor %}
+  </div>
+</header>
+
+
+   <!-- Navigation Bar -->
+   <nav class="nav-bar">
     <ul>
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="admit">Admit Card</a></li>
-      <li><a class="password_change-link" href="#">Change Password</a></li>
+      <li><a href="{% url 'home' %}" class="active">Home</a></li>
+      <li><a href="{% url 'admitcard' %}">Admit Card</a></li>
+      <li><a href="{% url 'changepass' %}">Change Password</a></li>
       <li><a href="evolution">Evaluation Form</a></li>
-      <li><a href="course-registration">Registration</a></li>
-      <li><a href="result">Result</a></li>
+      <li><a href="{% url 'courseregister' %}">Registration</a></li>
+      <li><a href="{% url 'result' %}">Result</a></li>
       <li><a href="#">Student Bill & Payment History</a></li>
       <li><a href="{% url 'studentinfo' %}">Student Information</a></li>
     </ul>
   </nav>
+
 
     <h4>Student Information Management</h4>
     <h5><p class="message-label">Message:</p></body></h5>
@@ -181,10 +196,16 @@
         <section class="student-info">
             
             <div class="info-row">
-                <img src="student_photo.jpg" alt="Student Photo" class="student-pic"><br><br>
+                
                 {% for student in students %}
+                {% if student.pic %}
+                <img src="{{student.pic.url}}" style="height: 150px; width: 150px;"><br><br>
+                {% endif %}
+                {% endfor %}
 
+                {% for student in students %}
                 <div class="info">
+                  
                     <label>Full Name</label>
                     <input type="text" value={{student.name}} readonly><br><br>
 
@@ -216,7 +237,7 @@
                     <input type="text" value={{student.phone}} readonly>
 
                     <label>Guargian Phone</label>
-                    <input type="text" value={{student.guargianphone}} readonly><br><br>
+                    <input type="text" value={{student.guardianphone}} readonly><br><br>
 
                     <label>Email</label>
                     <input type="text" value={{student.email}} readonly>

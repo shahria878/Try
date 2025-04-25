@@ -45,6 +45,7 @@
       border-radius: 50%;
       margin-top: 5px;
     }
+
     nav {
       background: #f8f8f8;
       border-top: 1px solid #ccc;
@@ -152,28 +153,46 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo-title">
-      <img src="uap_logo.png" alt="Logo">
-      <h1>University of Asia Pacific</h1>
-    </div>
+  <!-- Header Section -->
+<header class="header">
+  <div class="logo-title">
+    <img src="uap_logo.png" alt="UniCam Logo" class="logo" />
+    <h1>University of <span>Asia Pacific</span></h1>
+  </div>
+
+  <div class="user-panel" style="display: flex; align-items: center; gap: 20px;">
     <div class="user-info">
-      <p><strong>Shahria Amin</strong> <span class="green">22201212</span> / <a href="#">Logout</a></p>
-      <p><span class="green">Current →</span> 2024, Fall / 2024, Spring - Term</p>
-      <p><span class="red">Registration →</span> 2024, Fall / 2024, Spring - Term</p>
-      <img src="student_photo.jpg" alt="Student">
+      {% for student in students %}
+      <p><strong>{{student.name}}</strong> 22201212 {% endfor %}/
+        <a href="{% url 'logout' %}">Logout</a>
+      </p>
+      <p class="status">
+        <span class="green">Current →</span> 2024, Fall / 2024, Spring - Term<br />
+        <span class="red">Registration →</span>
+        <span class="green">2024, Fall / 2024, Spring - Term</span>
+      </p>
     </div>
-  </header>
+
+    {% for student in students %}
+      {% if student.pic %}
+        <img src="{{ student.pic.url }}" alt="Student Picture"
+             style="height: 100px; width: 100px;" />
+         <!-- Show only one picture (e.g., logged-in student) -->
+      {% endif %}
+    {% endfor %}
+  </div>
+</header>
+
 
   <nav>
-    <a href="#">Home</a>
-    <a class="active" href="#">Admit Card</a>
-    <a href="#">Change Password</a>
+    <a href="{% url 'home' %}">Home</a>
+    <a class="active" href="{% url 'admitcard' %}">Admit Card</a>
+    <a href="{% url 'changepass' %}">Change Password</a>
     <a href="#">Evaluation Form</a>
-    <a href="#">Registration</a>
+    <a href="{% url 'courseregister' %}">Registration</a>
     <a href="#">Result</a>
     <a href="#">Student Bill & Payment History</a>
-    <a href="#">Student Information</a>
+    <a href="{% url 'studentinfo' %}">Student Information</a>
   </nav>
 <body>
     <div class="container">
@@ -192,6 +211,12 @@
             <button type="submit" class="btn">Update</button>
         </form>
     </div>
+
+    <footer>
+      <hr class="footer-line" />
+      <p>Powered by <strong>Edusoft Consultants Ltd.</strong></p>
+      <p>&copy; 2013 - 2024 Edusoft Consultants Ltd. All rights reserved.</p>
+    </footer>
     
       <script>
         document.getElementById('').addEventListener('submit', function(e) {
@@ -219,8 +244,4 @@
       </script>
     
     </body>
-    <footer class="footer">
-        Powered by <strong>Edusoft Consultants Ltd.</strong><br>
-        Copyright © 2013 - 2024 Edusoft Consultants Ltd. All rights reserved.
-      </footer>
     </html>

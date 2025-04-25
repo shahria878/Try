@@ -248,86 +248,40 @@
     </ul>
   </nav>
 
-  <div class="container">
-    <h2>New course</h2>
-    <p class="note">Note: Choose courses and please carefully consider the tentative routine of final examination while choosing the courses.</p>
-
-    <div>
-      <label for="regNo">Registration No:</label>
-      <input type="text" id="regNo" value="222012158" />
-      <button onclick="loadData()">Load</button>
-    </div>
-
-    <p style="color: green; margin-top: 10px;">Registration Tutorial</p>
-
-    <div class="student-info">
-      <p><strong>Name:</strong> Shahria Amin</p>
-      <p><strong>Batch:</strong> 54</p>
-      <p><strong>Program:</strong> Bachelor of Science in Computer Science and Engineering</p>
-      <p><strong>Pre-Advising Cr. Limit:</strong> 24</p>
-      <p><strong>Taken Credit:</strong> 0</p>
-      <p><strong>Adviser Name:</strong> Tasnima Helaly</p>
-      <p><strong>Registration Fee:</strong> <span style="color: red;">0.00</span></p>
-    </div>
-
     <div class="message">Message:</div>
 
-    <h3>Select Your Sections</h3>
-    <table>
-    <thead>
+    <!-- Main Content -->
+  <div class="content">
+    <h2 style="text-align:center; color: #2e1a84;">Term Result</h2>
+    <table class="result-table">
+      <thead>
         <tr>
-            <th>SL</th>
-            <th>Code</th>
-            <th>Title</th>
-            <th>Credits</th>
-            <th>Semester</th>
-            <th>Type</th>
-            <th>Section</th>
-            <th>Section Name & Time</th>
+          <th>Course Code</th>
+          <th>Course Title</th>
+          <th>Credit</th>
+          <th>Grade</th>
+          <th>Grade Point</th>
         </tr>
-    </thead>
-    <tbody>
-        {% for register in registers %}
+      </thead>
+      <tbody>
+        
         <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ register.code }}</td>
-            <td>{{ register.title }}</td>
-            <td>{{ register.credits }}</td>
-            <td>{{ register.semester }}</td>
-            <td>{{ register.type }}</td>
-            <td>
-                <button class="btn add-btn" onclick="handleAdd('{{ register.code }}')">Add</button>
-                <button class="btn remove-btn" onclick="handleRemove('{{ register.code }}')">Remove</button>
-            </td>
-            <td>{{ register.section_name_time }}</td>
+          <td>{{ result.course_code }}</td>
+          <td>{{ result.course_title }}</td>
+          <td>{{ result.credit }}</td>
+          <td>{{ result.grade }}</td>
+          <td>{{ result.grade_point }}</td>
         </tr>
-        {% empty %}
+        
         <tr>
-            <td colspan="8">No courses found.</td>
+          <td colspan="5">No results found.</td>
         </tr>
-        {% endfor %}
-    </tbody>
-</table>
-  
-  <script>
-      function toggleSection(button) {
-          if (button.classList.contains('add')) {
-              button.classList.remove('add');
-              button.classList.add('remove');
-              button.textContent = 'Remove';
-          } else {
-              button.classList.remove('remove');
-              button.classList.add('add');
-              button.textContent = 'Add';
-          }
-      }
-  </script>
-  
-    <div class="btn-group">
-      <button class="btn">Show Completed Course</button>
-      <button class="btn">Show Future Course</button>
-    </div>
+        
+      </tbody>
+    </table>
   </div>
+
+  
 
   <footer>
     <hr class="footer-line" />

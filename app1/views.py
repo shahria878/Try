@@ -9,7 +9,9 @@ from .models import *
 # Create your views here.
 @login_required(login_url='login')
 def HomePage(request):
-    return render (request,'home.html')
+    students = Student.objects.all()
+    context = {'students': students}
+    return render (request,'home.html',context=context)
 
 def SignupPage(request):
     if request.method=='POST':
@@ -67,11 +69,34 @@ def ChangepassPage(request):
             user.save()
             update_session_auth_hash(request, user)  # Keeps user logged in
             return redirect('login')  # Or wherever you want to redirect
-    return render(request, 'changepass.html')
+    students = Student.objects.all()
+    context = {'students': students}
+    return render(request, 'changepass.html',context=context)
+
+def AdmitcardPage(request):
+    students = Student.objects.all()
+    registers = CourseRegister.objects.all()
+    context = {'registers': registers, 
+               'students': students}
+    return render (request,'admitcard.html',context=context)
 
 
 def CourseregisterPage(request):
     registers = CourseRegister.objects.all()
-    context = {'registers': registers}
+    students = Student.objects.all()
+    context = {'registers': registers, 
+               'students': students}
     return render(request, 'courseregister.html',context=context)
+
+
+def ResultPage(request):
+    students = Student.objects.all()
+    context = {'students': students}
+    return render (request,'result.html',context=context)
+
+
+
+
+
+
     

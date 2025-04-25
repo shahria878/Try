@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,14 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #080710;
+    margin: 0;
+    padding: 100px 100px;
+    /*background-image: url("{% static 'image/ucam.jpg' %}");*/
+    background-size: 700px 1500px; /* width height */
+    background-repeat: no-repeat; /* optional: stops image from repeating */
+    background-color: rgb(111, 0, 128);
+    background-position: center;
+    font-family: Arial, sans-serif;
 }
 .background{
     width: 430px;
@@ -33,23 +42,7 @@ body{
     position: absolute;
     border-radius: 50%;
 }
-.shape:first-child{
-    background: linear-gradient(
-        #1845ad,
-        #23a2f6
-    );
-    left: -80px;
-    top: -80px;
-}
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        #ff512f,
-        #f09819
-    );
-    right: -30px;
-    bottom: -80px;
-}
+
 form{
     height: 520px;
     width: 400px;
